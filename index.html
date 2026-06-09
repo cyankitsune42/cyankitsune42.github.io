@@ -32,19 +32,13 @@
         .container {
             max-width: 600px;
             width: 85%;
-            padding: 40px 20px;
+            padding: 80px 20px 40px 20px; /* Erzeugt den Abstand nach oben, blockiert aber nichts! */
             position: relative;
             z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-
-        /* Hält das Layout ohne Titel stabil */
-        .main-header {
-            height: 80px;
-            width: 100%;
-            display: block;
+            box-sizing: border-box;
         }
 
         .nav-btn {
@@ -132,7 +126,8 @@
             transition: all 0.3s ease;
             user-select: none;
             opacity: 0.6;
-            z-index: 5;
+            z-index: 10; /* Erhöht, damit er garantiert über allem anderen liegt */
+            padding: 10px; /* Macht den Klickbereich etwas größer */
         }
         .secret-trigger:hover {
             transform: scale(1.3) rotate(15deg);
@@ -146,7 +141,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(4, 7, 12, 0.96);
             backdrop-filter: blur(10px);
-            z-index: 10;
+            z-index: 100; /* Weit über dem Rest */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,7 +172,7 @@
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
             font-family: 'Playfair Display', serif;
             text-align: center;
-            z-index: 12;
+            z-index: 102;
         }
 
         .overlay.active .parchment {
@@ -200,193 +195,5 @@
             align-items: center;
             justify-content: flex-start;
             box-shadow: none;
-            transform: scale(1) translateY(0);
-            box-sizing: border-box;
-        }
-
-        .parchment h2 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.3rem;
-            color: #5d4037;
-            border-bottom: 1px dashed #bcaaa4;
-            padding-bottom: 15px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        /* Geburtstagstext über dem Bild */
-        .overlay-birthday-title {
-            display: none;
-            font-family: 'Cinzel Decorative', serif;
-            color: #ffca28;
-            text-shadow: 0 0 15px rgba(255, 202, 40, 0.5);
-            margin: 20px 0 5px 0;
-            padding: 0 15px;
-            z-index: 14;
-            animation: fadeInTitle 1s ease forwards;
-        }
-        
-        .overlay-birthday-title h1 {
-            font-size: 1.8rem;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-        .overlay-birthday-title p {
-            font-size: 1.2rem;
-            margin: 5px 0 0 0;
-            letter-spacing: 1px;
-            color: #ffca28;
-        }
-
-        @keyframes fadeInTitle {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .parchment p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-style: italic;
-            color: #3e2723;
-            margin-bottom: 0;
-        }
-
-        .lumos-link {
-            display: inline-block;
-            margin-top: 30px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.4rem;
-            color: #795548;
-            text-decoration: none;
-            cursor: pointer;
-            letter-spacing: 3px;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            padding: 5px 15px;
-        }
-        .lumos-link:hover {
-            color: #ffca28;
-            text-shadow: 0 0 15px #ffca28;
-            letter-spacing: 6px;
-        }
-
-        /* Das Bild aus deinem Repository */
-        .marauders-map-img {
-            display: none;
-            width: 100%;
-            height: calc(100vh - 120px);
-            max-width: 100vw;
-            object-fit: contain;
-            animation: mapAppear 1.2s ease forwards;
-            margin-top: 10px;
-        }
-
-        @keyframes mapAppear {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #8d6e63;
-            transition: color 0.3s;
-            z-index: 15;
-        }
-        .close-btn:hover { color: #5d4037; }
-        .parchment.map-open .close-btn { color: #ffffff; text-shadow: 0 0 10px rgba(0,0,0,0.8); font-size: 2.2rem; top: 15px; right: 25px; }
-
-        /* LUMOS FUNKEN */
-        .particle {
-            position: fixed;
-            background: radial-gradient(circle, rgba(255,236,179,1) 0%, rgba(255,202,40,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 13;
-            animation: floatUp var(--duration) ease-in-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) translateX(0) scale(0.5); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
-        }
-
-        /* EXPECTO PATRONUM EFFECT */
-        .patronus-spirit {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.2);
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(240,253,255,1) 0%, rgba(144,224,239,0.7) 35%, rgba(0,180,216,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 11;
-            opacity: 0;
-            filter: blur(10px);
-            box-shadow: 0 0 60px 40px rgba(0, 180, 216, 0.5), inset 0 0 40px 20px rgba(255,255,255,0.9);
-        }
-
-        .patronus-active {
-            animation: patronusErupt 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-
-        @keyframes patronusErupt {
-            0% { transform: translate(-50%, 20%) scale(0.2); opacity: 0; filter: blur(30px); }
-            15% { opacity: 1; filter: blur(8px); transform: translate(-50%, -30%) scale(1.3); }
-            40% { transform: translate(-50%, -60%) scale(1.7) rotate(-10deg); filter: blur(12px); opacity: 0.9; }
-            70% { opacity: 0.6; filter: blur(20px); }
-            100% { transform: translate(-50%, -130%) scale(2.5) rotate(10deg); filter: blur(40px); opacity: 0; }
-        }
-
-        @media (max-width: 380px) {
-            .parchment { padding: 30px 20px; }
-            .overlay-birthday-title h1 { font-size: 1.5rem; }
-            .overlay-birthday-title p { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="magic-container"></div>
-    <div id="patronus" class="patronus-spirit"></div>
-
-    <div class="container">
-        <div class="main-header"></div>
-
-        <a href="buecher.html" class="nav-btn highlight">Für deine Bücher</a>
-        <a href="gedichte.html" class="nav-btn">Für deine Gedichte</a>
-        <a href="kunst.html" class="nav-btn">Für deine Kunst</a>
-
-        <div class="footer">
-            <h3>IMPRESSUM</h3>
-            <p>
-                Manchmal rational aber unglaublich stolz auf dich und deinen Ehrgeiz. <br>
-                Lass mich dein Rückenwind sein, für alles was vor dir liegt.
-            </p>
+            transform: scale(1) translateY
             
-            <div class="social-icons">
-                <a href="https://www.instagram.com/cyankitsune42" target="_blank" class="social-link" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@cyan.kitsune" target="_blank" class="social-link" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                
-                <span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="magic-overlay" class="overlay">
-        <div id="parchment-card" class="parchment">
-            <span class="close-btn" onclick="closeMagic()">&times;</span>
-            
-            <div id="birthday-title-container" class="overlay-birthday-title">
-                <h1>HAPPY BIRTHDAY
-                    
