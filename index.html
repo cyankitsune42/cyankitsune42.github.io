@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- GEHEIM: Steuert weiterhin NUR die diskrete Vorschau bei WhatsApp -->
     <title>Cyan Kitsune</title>
     <meta name="description" content="Künstlerisches Portfolio von Cyan Kitsune">
     <meta property="og:title" content="Cyan Kitsune">
@@ -11,6 +12,7 @@
     <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome für die Social-Media-Icons laden -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -32,22 +34,26 @@
 
         .main-title {
             font-family: 'Cinzel Decorative', serif;
-            /* Auf 2.1rem verfeinert, damit es mobil garantiert auf eine Zeile passt */
             font-size: 2.1rem;
             color: #ffca28;
             margin-bottom: 5px;
             letter-spacing: 2px;
             line-height: 1.2;
             text-shadow: 0 0 15px rgba(255, 202, 40, 0.3);
-            white-space: nowrap; /* Verhindert das Umbrechen des Textes */
+            white-space: nowrap;
         }
 
+        /* Komplett angepasst: Jetzt im exakt selben Look wie die Hauptüberschrift */
         .subtitle {
-            font-size: 1.3rem;
-            font-style: italic;
-            color: #b0bec5;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.4rem;
+            color: #ffca28;
             margin-top: 10px;
             margin-bottom: 40px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 0 0 12px rgba(255, 202, 40, 0.3);
+            white-space: nowrap;
         }
 
         .nav-btn {
@@ -124,7 +130,7 @@
             text-shadow: 0 0 10px rgba(255, 202, 40, 0.4);
         }
 
-        /* Optimierung für sehr kleine Bildschirme */
+        /* Optimierung für kleinere Displays */
         @media (max-width: 380px) {
             .main-title { font-size: 1.8rem; }
             .subtitle { font-size: 1.1rem; }
@@ -135,7 +141,8 @@
 
     <div class="container">
         <h1 class="main-title">HAPPY BIRTHDAY</h1>
-        <div class="subtitle">Prinzessin (29 + 1)</div>
+        <!-- Text in Großbuchstaben umgewandelt für den perfekten Look der Schriftart -->
+        <div class="subtitle">PRINZESSIN (29 + 1)</div>
 
         <a href="buecher.html" class="nav-btn highlight">Hier könnten deine Bücher sein</a>
         <a href="gedichte.html" class="nav-btn">Hier könnten deine Gedichte sein</a>
