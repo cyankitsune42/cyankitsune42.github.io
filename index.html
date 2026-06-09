@@ -32,7 +32,7 @@
         .container {
             max-width: 600px;
             width: 85%;
-            padding: 20px 20px 40px 20px;
+            padding: 20px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -41,34 +41,18 @@
             box-sizing: border-box;
         }
 
-        /* NEU: Der edle Header im Harry Potter- & Kitsune-Stil */
-        .brand-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            gap: 15px;
+        /* NEU: Das professionelle Grafik-Logo auf der Startseite */
+        .brand-logo-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+            filter: drop-shadow(0 0 15px rgba(255, 202, 40, 0.3));
         }
-
-        .brand-header h1 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 2rem;
-            color: #ffca28;
-            margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 202, 40, 0.4);
-        }
-
-        .mask-icon {
-            font-size: 1.8rem;
-            color: #ffca28;
-            filter: drop-shadow(0 0 8px rgba(255, 202, 40, 0.5));
-            animation: pulseMask 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseMask {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.4)); }
-            100% { transform: scale(1.08); filter: drop-shadow(0 0 12px rgba(255, 202, 40, 0.7)); }
+        
+        .brand-logo-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .nav-btn {
@@ -103,7 +87,7 @@
         }
 
         .footer {
-            margin-top: 50px;
+            margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -169,8 +153,8 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 12, 0.96);
-            backdrop-filter: blur(10px);
+            background: rgba(4, 7, 12, 0.97);
+            backdrop-filter: blur(12px);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -223,7 +207,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Hält den Titel sauber ÜBER dem Bild */
+            justify-content: flex-start;
             box-shadow: none;
             transform: scale(1) translateY(0);
             box-sizing: border-box;
@@ -240,13 +224,13 @@
             letter-spacing: 1px;
         }
 
-        /* Geburtstagstext ÜBER dem Bild, nicht darauf geklatscht */
+        /* KORREKTUR: Geburtstagstext näher am Bild & absolut farbecht (kein Ausbleichen mehr) */
         .overlay-birthday-title {
             display: none;
             font-family: 'Cinzel Decorative', serif;
             color: #ffca28;
-            text-shadow: 0 0 15px rgba(255, 202, 40, 0.5);
-            margin: 15px 0 10px 0;
+            text-shadow: 0 0 15px rgba(255, 202, 40, 0.6);
+            margin: 10px 0 0 0; /* Weniger Abstand nach unten, rückt nah an das Bild */
             padding: 0 15px;
             z-index: 104;
             width: 100%;
@@ -254,15 +238,17 @@
         }
         
         .overlay-birthday-title h1 {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             margin: 0 0 2px 0;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            color: #ffca28; /* Garantiert sattes Gold */
         }
         .overlay-birthday-title p {
             font-size: 1.1rem;
             margin: 0;
-            letter-spacing: 1px;
-            color: #ffca28;
+            letter-spacing: 2px;
+            color: #ffca28; /* Exakt selbe Farbe, kein Ausbleichen! */
+            opacity: 1 !important; /* Verhindert opacity-Vererbung */
         }
 
         @keyframes fadeInTitle {
@@ -297,11 +283,11 @@
             letter-spacing: 6px;
         }
 
-        /* Das finale Artwork */
+        /* KORREKTUR: Nutzt den Platz ideal aus, da die Schrift jetzt näher angerückt ist */
         .marauders-map-img {
             display: none;
             width: 100%;
-            height: calc(100vh - 110px); /* Garantiert, dass Platz für den Text darüber bleibt */
+            height: calc(100vh - 95px); 
             max-width: 100vw;
             object-fit: contain;
             animation: mapAppear 1.2s ease forwards;
@@ -309,7 +295,7 @@
         }
 
         @keyframes mapAppear {
-            0% { opacity: 0; transform: scale(0.97); }
+            0% { opacity: 0; transform: scale(0.98); }
             100% { opacity: 1; transform: scale(1); }
         }
 
@@ -371,8 +357,6 @@
         }
 
         @media (max-width: 480px) {
-            .brand-header h1 { font-size: 1.6rem; }
-            .mask-icon { font-size: 1.4rem; }
             .overlay-birthday-title h1 { font-size: 1.4rem; }
             .overlay-birthday-title p { font-size: 1rem; }
         }
@@ -384,10 +368,58 @@
     <div id="patronus" class="patronus-spirit"></div>
 
     <div class="container">
-        <div class="brand-header">
-            <span class="mask-icon">🎭</span>
-            <h1>Cyan Kitsune</h1>
-            <span class="mask-icon">🎭</span>
+        <div class="brand-logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250">
+                <defs>
+                    <linearGradient id="hpGold" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fff4cc"/>
+                        <stop offset="30%" stop-color="#ffca28"/>
+                        <stop offset="70%" stop-color="#d4a317"/>
+                        <stop offset="100%" stop-color="#8a640f"/>
+                    </linearGradient>
+                    <filter id="magicGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feComponentTransfer in="blur" result="glow1">
+                            <feFuncA type="linear" slope="0.5"/>
+                        </feComponentTransfer>
+                        <feMerge>
+                            <feMergeNode in="glow1"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <g transform="translate(110, 125) scale(0.75)" filter="url(#magicGlow)">
+                    <path d="M-60,-70 C-75,-110 -40,-130 -25,-95 C-5,-105 5,-105 25,-95 C40,-130 75,-110 60,-70 C75,-20 70,50 0,90 C-70,50 -75,-20 -60,-70 Z" fill="#fcfaf2" stroke="#d4a317" stroke-width="2"/>
+                    <path d="M-60,-70 C-72,-105 -48,-115 -32,-93 Z" fill="#e63946"/>
+                    <path d="M60,-70 C72,-105 48,-115 32,-93 Z" fill="#e63946"/>
+                    <path d="M-40,-15 C-25,-25 -10,-15 -5,-12 C-15,-2 -30,-2 -40,-15 Z" fill="#1a1a1a"/>
+                    <path d="M-38,-14 C-25,-22 -12,-14 -8,-12" fill="none" stroke="#e63946" stroke-width="3"/>
+                    <path d="M40,-15 C25,-25 10,-15 5,-12 C15,-2 30,-2 40,-15 Z" fill="#1a1a1a"/>
+                    <path d="M38,-14 C25,-22 12,-14 8,-12" fill="none" stroke="#e63946" stroke-width="3"/>
+                    <path d="M0,-50 C-15,-50 -20,-30 0,-10 C20,-30 15,-50 0,-50 Z" fill="none" stroke="#457b9d" stroke-width="2"/>
+                    <path d="M0,-40 C-8,-40 -10,-30 0,-15 C10,-30 8,-40 0,-40 Z" fill="#e63946"/>
+                    <path d="M-52,-25 C-60,-10 -50,5 -35,0" fill="none" stroke="#e63946" stroke-width="3"/>
+                    <path d="M52,-25 C60,-10 50,5 35,0" fill="none" stroke="#e63946" stroke-width="3"/>
+                    <circle cx="-55" cy="98" r="6" fill="#d4a317"/>
+                    <circle cx="55" cy="98" r="6" fill="#d4a317"/>
+                </g>
+                <g transform="translate(500, 145)" filter="url(#magicGlow)" text-anchor="middle">
+                    <text font-family="'Cinzel Decorative', serif" font-weight="bold" font-size="72" fill="url(#hpGold)">Cyan Kitsune</text>
+                </g>
+                <g transform="translate(890, 125) scale(0.75)" filter="url(#magicGlow)">
+                    <path d="M-60,-70 C-75,-110 -40,-130 -25,-95 C-5,-105 5,-105 25,-95 C40,-130 75,-110 60,-70 C75,-20 70,50 0,90 C-70,50 -75,-20 -60,-70 Z" fill="#181d24" stroke="#d4a317" stroke-width="2"/>
+                    <path d="M-60,-70 C-72,-105 -48,-115 -32,-93 Z" fill="#8a640f"/>
+                    <path d="M60,-70 C72,-105 48,-115 32,-93 Z" fill="#8a640f"/>
+                    <path d="M-40,-15 C-25,-25 -10,-15 -5,-12 C-15,-2 -30,-2 -40,-15 Z" fill="#fffdec"/>
+                    <path d="M40,-15 C25,-25 10,-15 5,-12 C15,-2 30,-2 40,-15 Z" fill="#fffdec"/>
+                    <path d="M0,-50 C-15,-50 -20,-30 0,-10 C20,-30 15,-50 0,-50 Z" fill="none" stroke="#d4a317" stroke-width="2"/>
+                    <path d="M0,-40 C-8,-40 -10,-30 0,-15 C10,-30 8,-40 0,-40 Z" fill="#ffca28"/>
+                    <path d="M-52,-25 C-60,-10 -50,5 -35,0" fill="none" stroke="#d4a317" stroke-width="2"/>
+                    <path d="M52,-25 C60,-10 50,5 35,0" fill="none" stroke="#d4a317" stroke-width="2"/>
+                    <circle cx="-55" cy="98" r="6" fill="#ffca28"/>
+                    <circle cx="55" cy="98" r="6" fill="#ffca28"/>
+                </g>
+            </svg>
         </div>
 
         <a href="buecher.html" class="nav-btn highlight">Für deine Bücher</a>
@@ -479,33 +511,4 @@
                 document.getElementById('parchment-card').classList.remove('map-open');
                 document.getElementById('birthday-title-container').style.display = 'none';
                 document.getElementById('msg-title').style.display = 'block';
-                document.getElementById('msg-text').style.display = 'block';
-                document.getElementById('lumos-btn').style.display = 'block';
-                document.getElementById('marauders-map').style.display = 'none';
-                document.getElementById('magic-container').innerHTML = '';
-            }, 800);
-        }
-
-        function createParticle(container) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            const size = Math.random() * 25 + 5; 
-            const left = Math.random() * 100; 
-            const duration = Math.random() * 3 + 2; 
-            const delay = Math.random() * 2; 
-            const drift = (Math.random() * 200 - 100) + 'px'; 
-            
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = left + 'vw';
-            particle.style.setProperty('--duration', duration + 's');
-            particle.style.animationDelay = delay + 's';
-            particle.style.setProperty('--drift', drift);
-            
-            container.appendChild(particle);
-        }
-    </script>
-
-</body>
-</html>
+     
