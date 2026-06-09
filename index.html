@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome für die Social-Media-Icons laden -->
+    <!-- FontAwesome für Icons laden -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -24,12 +24,15 @@
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 600px;
             width: 85%;
             padding: 40px 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .main-title {
@@ -43,7 +46,6 @@
             white-space: nowrap;
         }
 
-        /* Komplett angepasst: Jetzt im exakt selben Look wie die Hauptüberschrift */
         .subtitle {
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.4rem;
@@ -78,7 +80,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Highlight-Button */
         .nav-btn.highlight {
             background: rgba(255, 202, 40, 0.04);
             border-color: rgba(255, 202, 40, 0.3);
@@ -110,6 +111,21 @@
             margin: 0 0 25px 0;
         }
 
+        /* Der geheime Button im Impressum (Jetzt als Waschbär) */
+        .secret-trigger {
+            display: inline-block;
+            cursor: pointer;
+            color: #ffca28;
+            font-size: 1.1rem;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        .secret-trigger:hover {
+            transform: scale(1.3) rotate(-10deg);
+            text-shadow: 0 0 10px #ffca28;
+        }
+
         /* Social Media Icons */
         .social-icons {
             margin-top: 15px;
@@ -130,18 +146,106 @@
             text-shadow: 0 0 10px rgba(255, 202, 40, 0.4);
         }
 
-        /* Optimierung für kleinere Displays */
+        /* MAGISCHES POP-UP (HARRY POTTER STYLE) */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 7, 12, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Pergament-Look für den Brief */
+        .parchment {
+            background: #f4eccf;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%), radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%);
+            background-size: 4px 4px;
+            color: #2b1d0c;
+            width: 85%; max-width: 450px;
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 40px #dfd09d;
+            border: 2px solid #c5b47f;
+            position: relative;
+            transform: scale(0.8) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .overlay.active .parchment {
+            transform: scale(1) translateY(0);
+        }
+
+        .parchment h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.3rem;
+            color: #5d4037;
+            border-bottom: 1px dashed #bcaaa4;
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .parchment p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            font-style: italic;
+            color: #3e2723;
+            margin-bottom: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8d6e63;
+            transition: color 0.3s;
+        }
+        .close-btn:hover { color: #5d4037; }
+
+        /* LUMOS PARTIKEL ANIMATION */
+        .particle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(255,236,179,1) 0%, rgba(255,202,40,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 11;
+            animation: floatUp var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
+        }
+
         @media (max-width: 380px) {
             .main-title { font-size: 1.8rem; }
             .subtitle { font-size: 1.1rem; }
+            .parchment { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Container für die fliegenden Lumos-Funken -->
+    <div id="magic-container"></div>
+
     <div class="container">
         <h1 class="main-title">HAPPY BIRTHDAY</h1>
-        <!-- Text in Großbuchstaben umgewandelt für den perfekten Look der Schriftart -->
         <div class="subtitle">PRINZESSIN (29 + 1)</div>
 
         <a href="buecher.html" class="nav-btn highlight">Hier könnten deine Bücher sein</a>
@@ -152,7 +256,7 @@
             <h3>IMPRESSUM</h3>
             <p>
                 Manchmal rational aber unglaublich stolz auf dich und deinen Ehrgeiz. <br>
-                Lass mich dein Rückenwind sein, für alles was vor dir liegt.
+                Lass mich dein Rückenwind sein, für alles was vor dir liegt.<span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
             </p>
             
             <div class="social-icons">
@@ -165,6 +269,60 @@
             </div>
         </div>
     </div>
+
+    <!-- DAS GEHEIME POP-UP FENSTER -->
+    <div id="magic-overlay" class="overlay">
+        <div class="parchment">
+            <span class="close-btn" onclick="closeMagic()">&times;</span>
+            <h2>Ich schwöre feierlich, <br>ich bin ein Tunichtgut.</h2>
+            <p>
+                Alles Liebe zum Geburtstag, meine Prinzessin! <br><br>
+                Genau wie die Karte des Rumtreibers ihre Geheimnisse erst offenbart, wenn man genau hinsieht, soll diese Seite ein Ort sein, der nur für dich und deine Träume wächst. <br><br>
+                Egal welche magischen oder realen Abenteuer vor uns liegen – ich stehe fest an deiner Seite.
+            </p>
+        </div>
+    </div>
+
+    <!-- MAGISCHES SCRIPT FÜR HARRY POTTER EFFEKT -->
+    <script>
+        function revealMagic() {
+            document.getElementById('magic-overlay').classList.add('active');
+            
+            const container = document.getElementById('magic-container');
+            container.innerHTML = ''; 
+            
+            for (let i = 0; i < 40; i++) {
+                createParticle(container);
+            }
+        }
+
+        function closeMagic() {
+            document.getElementById('magic-overlay').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('magic-container').innerHTML = '';
+            }, 600);
+        }
+
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 25 + 5; 
+            const left = Math.random() * 100; 
+            const duration = Math.random() * 3 + 2; 
+            const delay = Math.random() * 2; 
+            const drift = (Math.random() * 200 - 100) + 'px'; 
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = left + 'vw';
+            particle.style.setProperty('--duration', duration + 's');
+            particle.style.animationDelay = delay + 's';
+            particle.style.setProperty('--drift', drift);
+            
+            container.appendChild(particle);
+        }
+    </script>
 
 </body>
 </html>
