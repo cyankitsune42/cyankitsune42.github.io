@@ -31,6 +31,14 @@
             padding: 40px 20px;
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Platzhalter für den fehlenden Titel, damit die Buttons nicht am oberen Rand kleben */
+        .spacer {
+            height: 60px;
         }
 
         .nav-btn {
@@ -58,7 +66,6 @@
         .nav-btn.highlight {
             background: rgba(255, 202, 40, 0.04);
             border-color: rgba(255, 202, 40, 0.3);
-            margin-top: 30px; /* Schafft etwas Platz nach oben, da der Titel weg ist */
         }
         .nav-btn.highlight:hover {
             background: rgba(255, 202, 40, 0.12);
@@ -93,6 +100,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            height: 40px;
         }
 
         .social-link {
@@ -118,6 +126,7 @@
             transition: all 0.3s ease;
             user-select: none;
             opacity: 0.6;
+            z-index: 5;
         }
         .secret-trigger:hover {
             transform: scale(1.3) rotate(15deg);
@@ -129,12 +138,12 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 12, 0.94);
-            backdrop-filter: blur(8px);
+            background: rgba(4, 7, 12, 0.96);
+            backdrop-filter: blur(10px);
             z-index: 10;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
         .overlay.active {
@@ -142,7 +151,7 @@
             pointer-events: auto;
         }
 
-        /* Pergament-Look für das Zitat */
+        /* Pergament-Look */
         .parchment {
             background: #f4eccf;
             background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%), radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%);
@@ -155,7 +164,7 @@
             border: 2px solid #c5b47f;
             position: relative;
             transform: scale(0.7) translateY(30px);
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
             font-family: 'Playfair Display', serif;
             text-align: center;
             z-index: 12;
@@ -165,7 +174,7 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Vollbild-Modus für das große Finale */
+        /* Vollbild-Modus für das Bild */
         .parchment.map-open {
             max-width: 100vw;
             width: 100vw;
@@ -179,7 +188,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Oben ausrichten, damit Text über dem Bild Platz hat */
+            justify-content: flex-start;
             box-shadow: none;
             transform: scale(1) translateY(0);
             box-sizing: border-box;
@@ -196,7 +205,7 @@
             letter-spacing: 1px;
         }
 
-        /* Verschobener Geburtstagstitel über dem Bild */
+        /* Der dorthin verschobene Titel */
         .overlay-birthday-title {
             display: none;
             font-family: 'Cinzel Decorative', serif;
@@ -205,7 +214,7 @@
             margin: 20px 0 5px 0;
             padding: 0 15px;
             z-index: 14;
-            animation: fadeInTitle 1.5s ease forwards;
+            animation: fadeInTitle 1s ease forwards;
         }
         
         .overlay-birthday-title h1 {
@@ -252,20 +261,20 @@
             letter-spacing: 6px;
         }
 
-        /* Das spektakuläre Finalbild */
+        /* Das fertige Bild aus deinem Repository */
         .marauders-map-img {
             display: none;
             width: 100%;
-            height: calc(100vh - 120px); /* Zieht den Platz für den Titel oben ab */
+            height: calc(100vh - 120px);
             max-width: 100vw;
             object-fit: contain;
-            animation: mapAppear 1.5s ease forwards;
+            animation: mapAppear 1.2s ease forwards;
             margin-top: 10px;
         }
 
         @keyframes mapAppear {
-            0% { opacity: 0; transform: scale(0.9); filter: brightness(0.5); }
-            100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .close-btn {
@@ -274,5 +283,53 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #8d6e63;
-            transition: color 0.3s
-            
+            transition: color 0.3s;
+            z-index: 15;
+        }
+        .close-btn:hover { color: #5d4037; }
+        .parchment.map-open .close-btn { color: #ffffff; text-shadow: 0 0 10px rgba(0,0,0,0.8); font-size: 2.2rem; top: 15px; right: 25px; }
+
+        /* PARTIKEL */
+        .particle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(255,236,179,1) 0%, rgba(255,202,40,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 13;
+            animation: floatUp var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
+        }
+
+        /* PATRONUS EFFEKT */
+        .patronus-spirit {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.2);
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(240,253,255,1) 0%, rgba(144,224,239,0.7) 35%, rgba(0,180,216,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 11;
+            opacity: 0;
+            filter: blur(10px);
+            box-shadow: 0 0 60px 40px rgba(0, 180, 216, 0.5), inset 0 0 40px 20px rgba(255,255,255,0.9);
+        }
+
+        .patronus-active {
+            animation: patronusErupt 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes patronusErupt {
+            0% { transform: translate(-50%, 20%) scale(0.2); opacity: 0; filter: blur(30px); }
+            15% { opacity: 1; filter: blur(8px); transform: translate(-50%, -30%) scale(1.3); }
+            40% { transform: translate(-50%, -60%) scale(1.7) rotate(-10deg); filter: blur(12px); opacity: 0.9; }
+            70% { opacity: 0.6; filter: blur(20px); }
+            100% { transform: translate(-50%, -130%) scale(2.5) rotate(1
+                                                                       
