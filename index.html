@@ -111,24 +111,13 @@
             margin: 0 0 25px 0;
         }
 
-        /* Der geheime Button im Impressum (Jetzt als Waschbär) */
-        .secret-trigger {
-            display: inline-block;
-            cursor: pointer;
-            color: #ffca28;
-            font-size: 1.1rem;
-            margin-left: 5px;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-        .secret-trigger:hover {
-            transform: scale(1.3) rotate(-10deg);
-            text-shadow: 0 0 10px #ffca28;
-        }
-
-        /* Social Media Icons */
+        /* Social Media Icons & Geheimer Waschbär */
         .social-icons {
             margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         .social-link {
@@ -146,16 +135,32 @@
             text-shadow: 0 0 10px rgba(255, 202, 40, 0.4);
         }
 
+        /* Der geheime Waschbär ganz weit rechts */
+        .secret-trigger {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            user-select: none;
+            opacity: 0.6;
+        }
+        .secret-trigger:hover {
+            transform: scale(1.3) rotate(15deg);
+            opacity: 1;
+            text-shadow: 0 0 10px #ffca28;
+        }
+
         /* MAGISCHES POP-UP (HARRY POTTER STYLE) */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 12, 0.85);
+            background: rgba(4, 7, 12, 0.88);
             backdrop-filter: blur(8px);
             z-index: 10;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.8s ease;
         }
 
         .overlay.active {
@@ -175,10 +180,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 40px #dfd09d;
             border: 2px solid #c5b47f;
             position: relative;
-            transform: scale(0.8) translateY(20px);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.7) translateY(30px);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
             font-family: 'Playfair Display', serif;
             text-align: center;
+            z-index: 12;
         }
 
         .overlay.active .parchment {
@@ -220,7 +226,7 @@
             background: radial-gradient(circle, rgba(255,236,179,1) 0%, rgba(255,202,40,0) 70%);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 11;
+            z-index: 13;
             animation: floatUp var(--duration) ease-in-out infinite;
             opacity: 0;
         }
@@ -230,6 +236,34 @@
             10% { opacity: 0.8; }
             90% { opacity: 0.8; }
             100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
+        }
+
+        /* EXPECTO PATRONUM EFFEKT (SILBER-BLAUE GESTALT) */
+        .patronus-spirit {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.2);
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(240,253,255,1) 0%, rgba(144,224,239,0.7) 35%, rgba(0,180,216,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 11;
+            opacity: 0;
+            filter: blur(10px);
+            box-shadow: 0 0 60px 40px rgba(0, 180, 216, 0.5), inset 0 0 40px 20px rgba(255,255,255,0.9);
+        }
+
+        /* Die Animation, wie der Patronus emporsteigt */
+        .patronus-active {
+            animation: patronusErupt 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes patronusErupt {
+            0% { transform: translate(-50%, 20%) scale(0.2); opacity: 0; filter: blur(30px); }
+            15% { opacity: 1; filter: blur(8px); transform: translate(-50%, -30%) scale(1.3); }
+            40% { transform: translate(-50%, -60%) scale(1.7) rotate(-10deg); filter: blur(12px); opacity: 0.9; }
+            70% { opacity: 0.6; filter: blur(20px); }
+            100% { transform: translate(-50%, -130%) scale(2.5) rotate(10deg); filter: blur(40px); opacity: 0; }
         }
 
         @media (max-width: 380px) {
@@ -243,6 +277,9 @@
 
     <!-- Container für die fliegenden Lumos-Funken -->
     <div id="magic-container"></div>
+    
+    <!-- Das Element für das aufsteigende Patronus-Licht -->
+    <div id="patronus" class="patronus-spirit"></div>
 
     <div class="container">
         <h1 class="main-title">HAPPY BIRTHDAY</h1>
@@ -256,7 +293,7 @@
             <h3>IMPRESSUM</h3>
             <p>
                 Manchmal rational aber unglaublich stolz auf dich und deinen Ehrgeiz. <br>
-                Lass mich dein Rückenwind sein, für alles was vor dir liegt.<span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
+                Lass mich dein Rückenwind sein, für alles was vor dir liegt.
             </p>
             
             <div class="social-icons">
@@ -266,6 +303,9 @@
                 <a href="https://www.tiktok.com/@cyan.kitsune" target="_blank" class="social-link" title="TikTok">
                     <i class="fab fa-tiktok"></i>
                 </a>
+                
+                <!-- Der Waschbär ganz weit rechts -->
+                <span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
             </div>
         </div>
     </div>
@@ -276,18 +316,27 @@
             <span class="close-btn" onclick="closeMagic()">&times;</span>
             <h2>Ich schwöre feierlich, <br>ich bin ein Tunichtgut.</h2>
             <p>
-                Alles Liebe zum Geburtstag, meine Prinzessin! <br><br>
-                Genau wie die Karte des Rumtreibers ihre Geheimnisse erst offenbart, wenn man genau hinsieht, soll diese Seite ein Ort sein, der nur für dich und deine Träume wächst. <br><br>
-                Egal welche magischen oder realen Abenteuer vor uns liegen – ich stehe fest an deiner Seite.
+                „Weißt du, man kann Glück und Freude selbst in den dunkelsten Zeiten finden, wenn man sich nur daran erinnert, ein Licht anzuzünden.“<br><br>
+                Alles Liebe zum Geburtstag, meine Prinzessin! Ich wünsche dir, dass du dieses Licht und deine kreative Magie niemals verlierst. Ich werde immer da sein, um dir den Rücken freizuhalten.
             </p>
         </div>
     </div>
 
-    <!-- MAGISCHES SCRIPT FÜR HARRY POTTER EFFEKT -->
+    <!-- MAGISCHES SCRIPT FÜR HARRY POTTER EFFEKTE -->
     <script>
         function revealMagic() {
-            document.getElementById('magic-overlay').classList.add('active');
+            // 1. Patronus-Lichtgestalt aktivieren
+            const patronus = document.getElementById('patronus');
+            patronus.classList.remove('patronus-active');
+            void patronus.offsetWidth; // Trick, um die CSS-Animation neu zu starten
+            patronus.classList.add('patronus-active');
+
+            // 2. Pop-up öffnen (leicht verzögert für den perfekten visuellen Moment)
+            setTimeout(() => {
+                document.getElementById('magic-overlay').classList.add('active');
+            }, 200);
             
+            // 3. Lumos-Funken-Regen starten
             const container = document.getElementById('magic-container');
             container.innerHTML = ''; 
             
@@ -298,6 +347,7 @@
 
         function closeMagic() {
             document.getElementById('magic-overlay').classList.remove('active');
+            document.getElementById('patronus').classList.remove('patronus-active');
             setTimeout(() => {
                 document.getElementById('magic-container').innerHTML = '';
             }, 600);
