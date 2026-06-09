@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- GEHEIM: Steuert weiterhin NUR die diskrete Vorschau bei WhatsApp -->
     <title>Cyan Kitsune</title>
     <meta name="description" content="Künstlerisches Portfolio von Cyan Kitsune">
     <meta property="og:title" content="Cyan Kitsune">
@@ -11,20 +12,17 @@
     <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome für Icons laden -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background: linear-gradient(to bottom, #060b11 0%, #11161d 100%);
             color: #cfd8dc;
             font-family: 'Playfair Display', serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center;
             overflow-x: hidden;
         }
@@ -32,22 +30,32 @@
         .container {
             max-width: 600px;
             width: 85%;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-sizing: border-box;
         }
 
-        .brand-header-img {
-            width: 100%;
-            max-width: 550px;
-            height: auto;
-            margin: 0 auto 20px auto;
-            display: block;
-            filter: drop-shadow(0 0 10px rgba(255, 202, 40, 0.2));
+        .main-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.1rem;
+            color: #ffca28;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            text-shadow: 0 0 15px rgba(255, 202, 40, 0.3);
+            white-space: nowrap;
+        }
+
+        .subtitle {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.4rem;
+            color: #ffca28;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 0 0 12px rgba(255, 202, 40, 0.3);
+            white-space: nowrap;
         }
 
         .nav-btn {
@@ -82,10 +90,9 @@
         }
 
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative; /* Wichtig für die absolute Positionierung des Waschbären */
         }
 
         .footer h3 {
@@ -109,8 +116,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 40px;
-            padding-right: 40px; /* Platzhalter rechts schaffen, damit Waschbär nichts überlagert */
+            position: relative;
         }
 
         .social-link {
@@ -128,39 +134,31 @@
             text-shadow: 0 0 10px rgba(255, 202, 40, 0.4);
         }
 
-        /* BEHOBEN: Waschbär ist jetzt fest im Footer und scrollt NICHT mehr mit */
         .secret-trigger {
             position: absolute;
-            bottom: 0px;
-            right: 10px;
+            right: 0;
             cursor: pointer;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             transition: all 0.3s ease;
             user-select: none;
-            opacity: 0.5;
-            z-index: 10;
-            padding: 10px;
+            opacity: 0.6;
         }
-        
         .secret-trigger:hover {
-            transform: scale(1.2) rotate(15deg);
+            transform: scale(1.3) rotate(15deg);
             opacity: 1;
-            text-shadow: 0 0 15px #ffca28;
+            text-shadow: 0 0 10px #ffca28;
         }
 
-        /* POP-UP OVERLAY */
+        /* MAGISCHES POP-UP */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 12, 0.97);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
+            background: rgba(4, 7, 12, 0.94);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.8s ease;
         }
 
         .overlay.active {
@@ -168,30 +166,30 @@
             pointer-events: auto;
         }
 
+        /* Pergament-Look für das Zitat */
         .parchment {
             background: #f4eccf;
             background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%), radial-gradient(rgba(0,0,0,0.05) 15%, transparent 20%);
             background-size: 4px 4px;
             color: #2b1d0c;
-            width: 85%;
-            max-width: 450px;
+            width: 85%; max-width: 450px;
             padding: 40px 30px;
             border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 40px #dfd09d;
             border: 2px solid #c5b47f;
             position: relative;
             transform: scale(0.7) translateY(30px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
             font-family: 'Playfair Display', serif;
             text-align: center;
-            z-index: 102;
+            z-index: 12;
         }
 
         .overlay.active .parchment {
             transform: scale(1) translateY(0);
         }
 
-        /* BEHOBEN: Flexbox-Struktur korrigiert, damit Titel Platz hat */
+        /* Vollbild-Modus für das große Finale */
         .parchment.map-open {
             max-width: 100vw;
             width: 100vw;
@@ -205,10 +203,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             box-shadow: none;
             transform: scale(1) translateY(0);
-            box-sizing: border-box;
         }
 
         .parchment h2 {
@@ -220,39 +217,6 @@
             margin-top: 0;
             margin-bottom: 20px;
             letter-spacing: 1px;
-        }
-
-        /* BEHOBEN: Titel hat jetzt genug Abstand nach oben und kollidiert nicht mehr mit dem X */
-        .overlay-birthday-title {
-            display: none;
-            font-family: 'Cinzel Decorative', serif;
-            color: #ffca28;
-            text-shadow: 0 0 15px rgba(255, 202, 40, 0.6);
-            margin: 60px 0 10px 0; /* Mehr Abstand nach oben generiert */
-            padding: 0 15px;
-            z-index: 104;
-            width: 100%;
-            box-sizing: border-box;
-            animation: fadeInTitle 1s ease forwards;
-        }
-        
-        .overlay-birthday-title h1 {
-            font-size: 1.8rem;
-            margin: 0 0 5px 0;
-            letter-spacing: 3px;
-            color: #ffca28;
-        }
-        .overlay-birthday-title p {
-            font-size: 1.1rem;
-            margin: 0;
-            letter-spacing: 2px;
-            color: #ffca28;
-            opacity: 1 !important;
-        }
-
-        @keyframes fadeInTitle {
-            0% { opacity: 0; transform: translateY(-5px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
 
         .parchment p {
@@ -282,20 +246,20 @@
             letter-spacing: 6px;
         }
 
-        /* BEHOBEN: Bildhöhe dynamisch angepasst, damit es perfekt unter den Titel passt */
+        /* Das spektakuläre Finalbild direkt aus deinem Repository */
         .marauders-map-img {
             display: none;
             width: 100%;
-            height: calc(100vh - 180px); /* Platz für den oberen Titel geschaffen */
+            height: 100%;
             max-width: 100vw;
+            max-height: 100vh;
             object-fit: contain;
-            animation: mapAppear 1.2s ease forwards;
-            margin-top: 10px;
+            animation: mapAppear 1.5s ease forwards;
         }
 
         @keyframes mapAppear {
-            0% { opacity: 0; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1); }
+            0% { opacity: 0; transform: scale(0.9); filter: brightness(0.5); }
+            100% { opacity: 1; transform: scale(1); filter: brightness(1); }
         }
 
         .close-btn {
@@ -305,18 +269,18 @@
             cursor: pointer;
             color: #8d6e63;
             transition: color 0.3s;
-            z-index: 105;
+            z-index: 15;
         }
         .close-btn:hover { color: #5d4037; }
-        .parchment.map-open .close-btn { color: #ffffff; text-shadow: 0 0 10px rgba(0,0,0,0.8); font-size: 2.2rem; top: 15px; right: 25px; }
+        .parchment.map-open .close-btn { color: #ffffff; text-shadow: 0 0 10px rgba(0,0,0,0.8); font-size: 2.2rem; top: 20px; right: 25px; }
 
-        /* LUMOS FUNKEN */
+        /* LUMOS PARTIKEL */
         .particle {
             position: fixed;
             background: radial-gradient(circle, rgba(255,236,179,1) 0%, rgba(255,202,40,0) 70%);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 99;
+            z-index: 13;
             animation: floatUp var(--duration) ease-in-out infinite;
             opacity: 0;
         }
@@ -328,7 +292,7 @@
             100% { transform: translateY(-10vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
         }
 
-        /* EXPECTO PATRONUM EFFECT */
+        /* EXPECTO PATRONUM EFFEKT */
         .patronus-spirit {
             position: fixed;
             top: 50%; left: 50%;
@@ -337,7 +301,7 @@
             background: radial-gradient(circle, rgba(240,253,255,1) 0%, rgba(144,224,239,0.7) 35%, rgba(0,180,216,0) 70%);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 98;
+            z-index: 11;
             opacity: 0;
             filter: blur(10px);
             box-shadow: 0 0 60px 40px rgba(0, 180, 216, 0.5), inset 0 0 40px 20px rgba(255,255,255,0.9);
@@ -355,9 +319,10 @@
             100% { transform: translate(-50%, -130%) scale(2.5) rotate(10deg); filter: blur(40px); opacity: 0; }
         }
 
-        @media (max-width: 480px) {
-            .overlay-birthday-title h1 { font-size: 1.5rem; }
-            .overlay-birthday-title p { font-size: 1rem; }
+        @media (max-width: 380px) {
+            .main-title { font-size: 1.8rem; }
+            .subtitle { font-size: 1.1rem; }
+            .parchment { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -366,16 +331,17 @@
     <div id="magic-container"></div>
     <div id="patronus" class="patronus-spirit"></div>
 
-    <div class="container">
-        <!-- BEHOBEN: Relativer Pfad ./ für GitHub Pages, damit das Bild lädt -->
-        <img class="brand-header-img" src="./1000052800.png" alt="Cyan Kitsune">
+    <!-- Hintergrund-Audio (Ausweichlink zu einer zuverlässigen Spielemusik-Quelle) -->
+    <audio id="potter-theme" src="https://vgmdownloads.com/soundtracks/harry-potter-and-the-sorcerers-stone-ps1/yvbybpgm/02.%20Hedwig%27s%20Theme%20%28Main%20Title%29.mp3" preload="auto" loop></audio>
 
-        <!-- Buttons -->
+    <div class="container">
+        <h1 class="main-title">HAPPY BIRTHDAY</h1>
+        <div class="subtitle">PRINZESSIN (29 + 1)</div>
+
         <a href="buecher.html" class="nav-btn highlight">Für deine Bücher</a>
         <a href="gedichte.html" class="nav-btn">Für deine Gedichte</a>
         <a href="kunst.html" class="nav-btn">Für deine Kunst</a>
 
-        <!-- Impressum -->
         <div class="footer">
             <h3>IMPRESSUM</h3>
             <p>
@@ -390,23 +356,17 @@
                 <a href="https://www.tiktok.com/@cyan.kitsune" target="_blank" class="social-link" title="TikTok">
                     <i class="fab fa-tiktok"></i>
                 </a>
+                
+                <span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
             </div>
-
-            <!-- BEHOBEN: Der Waschbär sitzt jetzt hier sicher verankert im Footer -->
-            <span class="secret-trigger" onclick="revealMagic()" title="??">🦝</span>
         </div>
     </div>
 
-    <!-- MAGISCHES OVERLAY -->
+    <!-- GEHEIMES POP-UP -->
     <div id="magic-overlay" class="overlay">
         <div id="parchment-card" class="parchment">
             <span class="close-btn" onclick="closeMagic()">&times;</span>
             
-            <div id="birthday-title-container" class="overlay-birthday-title">
-                <h1>HAPPY BIRTHDAY</h1>
-                <p>PRINZESSIN (29 + 1)</p>
-            </div>
-
             <h2 id="msg-title">Ich schwöre feierlich, <br>ich bin ein Tunichtgut.</h2>
             <p id="msg-text">
                 „Weißt du, man kann Glück und Freude selbst in den dunkelsten Zeiten finden, wenn man sich nur daran erinnert, ein Licht anzuzünden.“
@@ -414,6 +374,7 @@
             
             <div id="lumos-btn" class="lumos-link" onclick="openMaraudersMap()">LUMOS</div>
 
+            <!-- Korrigierter Dateiname passend zum GitHub-Repository -->
             <img id="marauders-map" class="marauders-map-img" src="file_0000000037e871fd8bd6e0fd161d3f04.png" alt="Magisches Artwork">
         </div>
     </div>
@@ -437,18 +398,28 @@
         }
 
         function openMaraudersMap() {
+            // Musik abspielen
+            const audio = document.getElementById('potter-theme');
+            if(audio) {
+                audio.currentTime = 0;
+                audio.volume = 0.4;
+                audio.play().catch(e => console.log("Audio blockiert, läuft geräuschlos weiter."));
+            }
+
+            // Text und Button ausblenden
             document.getElementById('msg-title').style.display = 'none';
             document.getElementById('msg-text').style.display = 'none';
             document.getElementById('lumos-btn').style.display = 'none';
             
+            // Auf Vollbild umschalten
             const card = document.getElementById('parchment-card');
             card.classList.add('map-open');
             
-            document.getElementById('birthday-title-container').style.display = 'block';
-            
+            // Dein Bild anzeigen
             const mapImg = document.getElementById('marauders-map');
             mapImg.style.display = 'block';
             
+            // Lumos-Funkenregen zünden
             const container = document.getElementById('magic-container');
             for (let i = 0; i < 30; i++) {
                 createParticle(container);
@@ -459,9 +430,12 @@
             document.getElementById('magic-overlay').classList.remove('active');
             document.getElementById('patronus').classList.remove('patronus-active');
             
+            // Musik stoppen
+            const audio = document.getElementById('potter-theme');
+            if(audio) { audio.pause(); }
+            
             setTimeout(() => {
                 document.getElementById('parchment-card').classList.remove('map-open');
-                document.getElementById('birthday-title-container').style.display = 'none';
                 document.getElementById('msg-title').style.display = 'block';
                 document.getElementById('msg-text').style.display = 'block';
                 document.getElementById('lumos-btn').style.display = 'block';
