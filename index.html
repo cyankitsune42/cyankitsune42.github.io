@@ -354,7 +354,7 @@
                     <i class="fab fa-tiktok"></i>
                 </a>
                 
-                <span class="secret-trigger" onclick="revealMagic()" title="??"><i class="fa-solid fa-deathly-hallows"></i></span>
+                <span class="secret-trigger" onclick="revealMagic()" title="??"><i class="fas fa-dove"></i></span>
             </div>
         </div>
     </div>
@@ -393,7 +393,6 @@
         }
 
         function openMaraudersMap() {
-            // Musik abspielen
             const audio = document.getElementById('potter-theme');
             if(audio) {
                 audio.currentTime = 0;
@@ -401,20 +400,16 @@
                 audio.play().catch(e => console.log("Audio blockiert, läuft geräuschlos weiter."));
             }
 
-            // Text und Button ausblenden
             document.getElementById('msg-title').style.display = 'none';
             document.getElementById('msg-text').style.display = 'none';
             document.getElementById('lumos-btn').style.display = 'none';
             
-            // Auf Vollbild umschalten
             const card = document.getElementById('parchment-card');
             card.classList.add('map-open');
             
-            // Dein Bild anzeigen
             const mapImg = document.getElementById('marauders-map');
             mapImg.style.display = 'block';
             
-            // Lumos-Funkenregen zünden
             const container = document.getElementById('magic-container');
             for (let i = 0; i < 30; i++) {
                 createParticle(container);
@@ -425,7 +420,6 @@
             document.getElementById('magic-overlay').classList.remove('active');
             document.getElementById('patronus').classList.remove('patronus-active');
             
-            // Musik stoppen
             const audio = document.getElementById('potter-theme');
             if(audio) { audio.pause(); }
             
